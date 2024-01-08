@@ -31,6 +31,8 @@ public class Operand {
      * operand.
      */
     public static boolean check(String token) {
+        // if specified token is an operand,
+        // return true
         return false;
     }
 }
