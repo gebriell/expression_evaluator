@@ -3,6 +3,7 @@ package edu.csc413.calculator.operators;
 import edu.csc413.calculator.evaluator.Operand;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Operator {
     // The Operator class should contain an instance of a HashMap
@@ -16,18 +17,29 @@ public abstract class Operator {
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
 
-    HashMap operators = new HashMap();
-    operators.put( "+", new AdditionOperator);
-    // operators.put( "-", new SubtractionOperator() );
-    
+    // encapsulate hashmap using private
+    // have hashmap be shared for every instance using static
+    // if we don't use static, each instance will have its own hashmap
+    // declared outside static for scope purposes
+    private static Map<String, Operator> operators;
+
+    // executes once when loaded to memory
+    static {
+        operators = new HashMap<>();
+        operators.put("+", new AddOperator());
+        // operators.put( "-", new SubtractionOperator() );
+    }
+
     /**
      * retrieve the priority of an Operator
+     *
      * @return priority of an Operator as an int
      */
     public abstract int priority();
 
     /**
      * Abstract method to execute an operator given two operands.
+     *
      * @param operandOne first operand of operator
      * @param operandTwo second operand of operator
      * @return an operand of the result of the operation.
@@ -43,11 +55,14 @@ public abstract class Operator {
      * @return reference to a Operator instance.
      */
     public static Operator getOperator(String token) {
+
+        // return the proper operator from the
+        // string object
         return null;
     }
 
-    
-     /**
+
+    /**
      * determines if a given token is a valid operator.
      * please do your best to avoid static checks
      * for example token.equals("+") and so on.

@@ -14,8 +14,8 @@ public class AddOperator extends Operator{
     @Override
     public Operand execute(Operand operandOne, Operand operandTwo) {
 
-        // returns the sum of the two operand objects after converting them to integers
-        // and then back to an operand object.
+        // returns the sum of the two operand objects after converting
+        // them to integers.
         return new Operand(operandOne.getValue() + operandTwo.getValue());
     }
 }
