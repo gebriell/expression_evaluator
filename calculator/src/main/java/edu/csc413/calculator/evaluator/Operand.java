@@ -5,11 +5,22 @@ package edu.csc413.calculator.evaluator;
  * in a valid mathematical expression.
  */
 public class Operand {
+
+    // Instance variable to store the operand value
+    private int value;
+
     /**
      * construct operand from string token.
      */
     public Operand(String token) {
 
+        if (check(token)) if (check(token)) {
+            // Parse and store the value
+            this.value = Integer.parseInt(token);
+        } else {
+            // Handle invalid input
+            throw new IllegalArgumentException("Invalid operand token: " + token);
+        }
     }
 
     /**
@@ -17,13 +28,17 @@ public class Operand {
      */
     public Operand(int value) {
 
+        // passes the int value to the operand object
+        this.value = value;
     }
 
     /**
      * return value of operand
      */
     public int getValue() {
-        return 0;
+
+        // returns the operand object's value
+        return value;
     }
 
     /**
@@ -31,8 +46,14 @@ public class Operand {
      * operand.
      */
     public static boolean check(String token) {
-        // if specified token is an operand,
-        // return true
-        return false;
+
+        // check if token is a valid operand (integer),
+        // return token.matches("\\d+"):
+        try {
+            Integer.parseInt(token);
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
     }
 }
