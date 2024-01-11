@@ -1,5 +1,6 @@
 package edu.csc413.calculator.operators;
 
+import edu.csc413.calculator.evaluator.InvalidTokenException;
 import edu.csc413.calculator.evaluator.Operand;
 
 import java.util.HashMap;
@@ -27,7 +28,10 @@ public abstract class Operator {
     static {
         operators = new HashMap<>();
         operators.put("+", new AddOperator());
-        // operators.put( "-", new SubtractionOperator() );
+        // operators.put( "-", new SubtractOperator() );
+        // operators.put( "-", new MultiplyOperator() );
+        // operators.put( "-", new DivideOperator() );
+        // operators.put( "-", new PowerOperator() );
     }
 
     /**
@@ -58,6 +62,13 @@ public abstract class Operator {
 
         // return the proper operator from the
         // string object
+
+        // if token is valid, it will be
+        // equivalent to one of the keys
+        // in our operator hashmap
+        if (check(token)) {
+            return operators.get(token);
+        }
         return null;
     }
 
@@ -70,8 +81,6 @@ public abstract class Operator {
      */
     public static boolean check(String token) {
 
-        // if specified token is an operator,
-        // return true
-        return false;
+        return operators.containsKey(token);
     }
 }
