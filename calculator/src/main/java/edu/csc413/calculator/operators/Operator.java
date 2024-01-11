@@ -66,6 +66,7 @@ public abstract class Operator {
         // if token is valid, it will be
         // equivalent to one of the keys
         // in our operator hashmap
+
         if (check(token)) {
             return operators.get(token);
         }
@@ -80,6 +81,10 @@ public abstract class Operator {
      * Think about what happens if we add more operators.
      */
     public static boolean check(String token) {
+
+        // instead of comparing the operators
+        // to our token, we compare the token
+        // to the operator keys in our hashmap
 
         return operators.containsKey(token);
     }
