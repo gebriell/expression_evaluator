@@ -28,8 +28,8 @@ public abstract class Operator {
     static {
         operators = new HashMap<>();
         operators.put("+", new AddOperator());
-        // operators.put( "-", new SubtractOperator() );
-        operators.put( "-", new MultiplyOperator() );
+        operators.put( "-", new SubtractOperator() );
+        operators.put( "*", new MultiplyOperator() );
         // operators.put( "-", new DivideOperator() );
         // operators.put( "-", new PowerOperator() );
     }
