@@ -1,28 +1,36 @@
-# CSC 413 - Project One
 
-## Student Name  : Name here
+# Object-Oriented Calculator with GUI
 
-## Student ID    : ID here
+## Overview
 
-## Student Email : Email here
+This repository houses a Java-based project that demonstrates object-oriented principles in the development of a calculator application. It comprises two primary components:
 
-### Note failure to completely fill out this README.md could cause you to recieve a  0 for your project until correctly done
+Expression Evaluator: An object capable of parsing and computing mathematical expressions.
+Graphical User Interface (GUI): A user-friendly interface for interacting with the expression evaluator.
+## Key Features
 
-# Adding the JUnit 5 Jars to your project.
+Object-Oriented Design:
+Leverages an operator superclass, extended by classes representing specific operators (+, -, *, /, ^)
+Employs an operand class to handle numerical inputs and parsing
+Expression Parsing:
+Divides expressions into operands and operators using delimiters
+Mathematical Calculations:
+Performs arithmetic operations based on parsed expressions
+User-Friendly GUI:
+Provides a visual interface for input and output
+Extensibility:
+Designed for potential expansion with additional operators and features
+## Setup and Usage
 
-### InteliJ
-In order to use the Unit tests given you will need to let intelij know where to find the needed jars. (jars are just java version of an archived folder or zip file.). 
+Clone this repository.
+Open the project in a Java IDE.
+Compile and run the CalculatorGUI.java file.
+## Future Enhancements
 
-Intelij will actually find these jars for you while imporiting the project.
+Implement additional operators (e.g., parentheses, square root).
+Support decimal numbers.
+Add error handling for invalid expressions.
+Explore alternative GUI frameworks for visual customization.
+## Contributions
 
-If for some reason it does not, you can add the jars in the following way:
-
-1. Complete the process for "create project from existing resources"
-2. Then go to File -> Project Structure.
-3. Inside project Structure select the "Libraries" tab on the left.
-4. You will see a "+" symbol near the top of the window. CLick this symbol.
-5. A little window will popup asking what kind of library you want to import. Select "jar"
-6. After selection jar, a file selector will appear, navigate to the folder calcualtor/src/test/resources
-7. Add ALL jars in this folder. Then hit OK/Accept until all windows for project structure are closed.
-8. Now all jar needed to run unit test should be attached to your project.
-9. To run unit tests you can simply select any of the files in test/java. Also you may right-slick on the java folder inside test and select run all tests to run all given unit tests.
+Your contributions and feedback are welcome! Feel free to fork the repository and submit pull requests.
