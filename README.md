@@ -9,17 +9,17 @@ Expression Evaluator: An object capable of parsing and computing mathematical ex
 Graphical User Interface (GUI): A user-friendly interface for interacting with the expression evaluator.
 ## Key Features
 
-Object-Oriented Design:
-Leverages an operator superclass, extended by classes representing specific operators (+, -, *, /, ^)
-Employs an operand class to handle numerical inputs and parsing
-Expression Parsing:
-Divides expressions into operands and operators using delimiters
-Mathematical Calculations:
-Performs arithmetic operations based on parsed expressions
-User-Friendly GUI:
-Provides a visual interface for input and output
-Extensibility:
-Designed for potential expansion with additional operators and features
+# Object-Oriented Design:
+Leverages an operator superclass, extended by classes representing specific operators (+, -, *, /, ^).
+Employs an operand class to handle numerical inputs and parsing.
+# Expression Parsing:
+Divides expressions into operands and operators using delimiters.
+# Mathematical Calculations:
+Performs arithmetic operations based on parsed expressions.
+# User-Friendly GUI:
+Provides a visual interface for input and output.
+# Extensibility:
+Designed for potential expansion with additional operators and features.
 ## Setup and Usage
 
 Clone this repository.
