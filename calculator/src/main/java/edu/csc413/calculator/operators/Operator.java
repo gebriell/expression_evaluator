@@ -32,6 +32,9 @@ public abstract class Operator {
         operators.put( "*", new MultiplyOperator() );
         operators.put( "/", new DivideOperator() );
         operators.put( "^", new PowerOperator() );
+        operators.put( "(", new LeftParenthesis());
+        operators.put( ")", new RightParenthesis());
+
     }
 
     /**
