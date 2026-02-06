@@ -14,7 +14,7 @@ public class Operand {
      */
     public Operand(String token) {
 
-        if (check(token)) if (check(token)) {
+        if (check(token)) {
             // Parse and store the value
             this.value = Integer.parseInt(token);
         } else {
