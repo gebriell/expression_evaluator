@@ -28,7 +28,8 @@ public class Evaluator {
         // the priority of any operator in the operator stack other than
         // the usual mathematical operators - "+-*/" - should be less than the priority
         // of the usual operators
-
+        // Push a left parenthesis as a sentinel so we never peek an empty stack.
+        operatorStack.push(Operator.getOperator("("));
 
         while (this.expressionTokenizer.hasMoreTokens()) {
             // filter out spaces
@@ -48,12 +49,42 @@ public class Evaluator {
                     // skeleton for an example.
                     Operator newOperator = Operator.getOperator(expressionToken);
 
+                    // If it's a left parenthesis, push to operator stack
+                    if (newOperator instanceof LeftParenthesis) {
+                        operatorStack.push(newOperator);
+                        continue;
+                    }
+
+                    // If it's a right parenthesis, solve until left parenthesis
+                    if (newOperator instanceof RightParenthesis) {
+                        // Pop operators and evaluate until we hit a left parenthesis
+                        while (!(operatorStack.peek() instanceof LeftParenthesis)) {
+                            Operator operatorFromStack = operatorStack.pop();
+                            // Ensure there are enough operands
+                            if (operandStack.size() < 2) {
+                                throw new InvalidTokenException("Insufficient operands");
+                            }
+                            Operand operandTwo = operandStack.pop();
+                            Operand operandOne = operandStack.pop();
+                            Operand result = operatorFromStack.execute(operandOne, operandTwo);
+                            operandStack.push(result);
+                        }
+                        // pop the left parenthesis and discard
+                        operatorStack.pop();
+                        continue;
+                    }
+
+                    // For normal operators, evaluate any operators on the stack
+                    // with priority >= new operator before pushing it.
                     while (operatorStack.peek().priority() >= newOperator.priority()) {
-                        // note that when we eval the expression 1 - 2 we will
-                        // push the 1 then the 2 and then do the subtraction operation
-                        // This means that the first number to be popped is the
-                        // second operand, not the first operand - see the following code
                         Operator operatorFromStack = operatorStack.pop();
+                        // In case we accidentally encounter a left parenthesis, stop.
+                        if (operatorFromStack instanceof LeftParenthesis) {
+                            break;
+                        }
+                        if (operandStack.size() < 2) {
+                            throw new InvalidTokenException("Insufficient operands");
+                        }
                         Operand operandTwo = operandStack.pop();
                         Operand operandOne = operandStack.pop();
                         Operand result = operatorFromStack.execute(operandOne, operandTwo);
@@ -65,16 +96,24 @@ public class Evaluator {
             }
         }
 
+        // After we've scanned all tokens, apply remaining operators until
+        // we reach the sentinel left parenthesis.
+        while (!(operatorStack.peek() instanceof LeftParenthesis)) {
+            Operator operatorFromStack = operatorStack.pop();
+            if (operandStack.size() < 2) {
+                throw new InvalidTokenException("Insufficient operands");
+            }
+            Operand operandTwo = operandStack.pop();
+            Operand operandOne = operandStack.pop();
+            Operand result = operatorFromStack.execute(operandOne, operandTwo);
+            operandStack.push(result);
+        }
 
-        // Control gets here when we've picked up all of the tokens; you must add
-        // code to complete the evaluation - consider how the code given here
-        // will evaluate the expression 1+2*3
-        // When we have no more tokens to scan, the operand stack will contain 1 2
-        // and the operator stack will have + * with 2 and * on the top;
-        // In order to complete the evaluation we must empty the stacks,
-        // that is, we should keep evaluating the operator stack until it is empty;
-        // Suggestion: create a method that processes the operator stack until empty.
+        // The final result should be the only operand on the stack
+        if (operandStack.size() != 1) {
+            throw new InvalidTokenException("Malformed expression");
+        }
 
-        return 0;
+        return operandStack.pop().getValue();
     }
 }
